@@ -1,0 +1,13 @@
+<div ng-controller="squadController">
+  <div style="margin: 0px auto;" ng-hide="loading_complete">
+    <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+  </div>
+  <div ng-hide="loading_complete && player.squad">
+    <div ng-repeat="squad in squads">
+      {{ squad.name }}
+    </div>
+  </div>
+  <div layout="column" ng-show="loading_complete && player.squad">
+    {{ player.squad }}
+  </div>
+</div>
