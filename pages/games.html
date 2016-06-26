@@ -1,0 +1,29 @@
+<md-content layout="column">
+  <h1 class="md-display-3">Games</h1>
+  <div ng-show="loading_complete">
+    <div layout="column">
+      <div ng-repeat="game in games" layout="row">
+        <md-button class="md-raised md-primary" flex ng-click="viewGame(game)">
+          <div layout="column">
+            <h1 class="md-title">{{ game.title }}</h1>
+            <p class="md-subhead">{{ gameState(game) }}</p>
+          </div>
+        </md-button>
+        <div layout="column" flex="30">
+          <p class="md-body-2">
+            Registration Date: {{ game.registration_date | date:'medium' }}
+          </p>
+          <p class="md-body-2">
+            Start Date: {{ game.start_date | date:'medium' }}
+          </p>
+          <p class="md-body-2">
+            End Date: {{ game.end_date | date:'medium' }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin: 0px auto;" ng-hide="loading_complete">
+    <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+  </div>
+</md-content>

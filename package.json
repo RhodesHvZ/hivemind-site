@@ -1,0 +1,27 @@
+{
+  "name": "hivemind-site",
+  "version": "1.0.0",
+  "description": "Website for the Rhodes University Humans vs. Zombies system. Powered by Firebase and AngularJS and based off of the system created by the students of the University of Chicago \\([Github](https://github.com/kz26/uchicago-hvz)\\).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "until http-server -p 3000 -a localhost; do echo \"Server crashed with exit code $?. Respawning...\n\" >&2; sleep 2; done;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RhodesHvZ/hivemind-site.git"
+  },
+  "keywords": [
+    "Humans vs. Zombies",
+    "HvZ"
+  ],
+  "author": "Greg Linklater & Rhodes HvZ Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RhodesHvZ/hivemind-site/issues"
+  },
+  "homepage": "https://github.com/RhodesHvZ/hivemind-site#readme",
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "angular-firebasetest",
+  "authors": [
+    "Greg Linklater <greglink49@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.6",
+    "firebase": "^3.0.4",
+    "angularfire": "^2.0.1",
+    "angular-animate": "^1.5.6",
+    "angular-aria": "^1.5.6",
+    "angular-messages": "^1.5.6",
+    "angular-material": "^1.0.9",
+    "roboto-googlefont": "*",
+    "angular-material-icons": "^0.7.0",
+    "angular-route": "^1.5.7"
+  }
+}

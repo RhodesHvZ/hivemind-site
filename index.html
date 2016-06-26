@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app="mainApp">
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css">
+  <link rel="stylesheet" href="/bower_components/angular-material-icons/angular-material-icons.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" href="/css/app.css">
+
+  <script src="/bower_components/angular/angular.min.js"></script>
+  <script src="/bower_components/angular-route/angular-route.min.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
+  <script src="/bower_components/angular-material/angular-material.min.js"></script>
+  <script src="/bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+
+  <script src="/bower_components/firebase/firebase.js"></script>
+  <script src="/bower_components/angularfire/dist/angularfire.min.js"></script>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/static/halls.js"></script>
+  <script src="/js/static/residences.js"></script>
+  <script src="/js/queries/database_refs.js"></script>
+  <script src="/js/queries/gameQueries.js"></script>
+  <script src="/js/queries/chatQueries.js"></script>
+  <script src="/js/models/Achievement.js"></script>
+  <script src="/js/models/AchievementProgress.js"></script>
+  <script src="/js/models/Award.js"></script>
+  <script src="/js/models/Chat.js"></script>
+  <script src="/js/models/Event.js"></script>
+  <script src="/js/models/Game.js"></script>
+  <script src="/js/models/Mission.js"></script>
+  <script src="/js/models/Player.js"></script>
+  <script src="/js/models/Squad.js"></script>
+  <script src="/js/models/Ticket.js"></script>
+  <script src="/js/models/User.js"></script>
+  <script src="/js/controllers/chatController.js"></script>
+  <script src="/js/controllers/gameController.js"></script>
+  <script src="/js/controllers/homeController.js"></script>
+  <script src="/js/controllers/mapController.js"></script>
+  <script src="/js/controllers/playerController.js"></script>
+  <script src="/js/controllers/profileController.js"></script>
+
+  <base href="/">
+</head>
+<body ng-controller="mainAppController">
+<div layout="row" layout-fill>
+  <md-sidenav class="md-sidenav-right" md-component-id="sidenav" md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-tall md-hue-2">
+      <span flex></span>
+      <div layout="column" class="md-toolbar-tools-bottom inset" ng-if="isLoggedIn">
+        <img ng-src="{{ userProfileUrl  }}" alt="{{ userDisplayName }}" class="profile_img">
+        <p class="md-body-1" style="margin-bottom:1px;margin-top:3px;">{{ userDisplayName }}</p>
+        <p class="md-caption" style="margin-bottom:5px;margin-top:1px;">{{ userEmail }}</p>
+      </div>
+      <div layout=column class="md-toolbar-tools-bottom inset" ng-if="!isLoggedIn">
+        <p class="md-caption" style="margin-bottom:5px;">Not logged in...</p>
+      </div>
+    </md-toolbar>
+    <md-subheader>Links</md-subheader>
+    <md-list ng-show="isLoggedIn">
+    <md-list-item ng-click="redirect('/')">
+      <div class="inset">
+        *icon*
+      </div>
+      <div class="inset">
+        Home
+      </div>
+    </md-list-item>
+    <md-list-item ng-click="redirect('/games')">
+      <div class="inset">
+        *icon*
+      </div>
+      <div class="inset">
+        Games
+      </div>
+    </md-list-item>
+    <md-list-item ng-click="redirect('/other')">
+      <div class="inset">
+        *icon*
+      </div>
+      <div class="inset">
+        Other
+      </div>
+    </md-list-item>
+    <div ng-if="$route.current.params.game_name">
+      <md-divider></md-divider>
+      <md-subheader>Game</md-subheader>
+      <md-list-item ng-click="console.log()">
+        <div class="inset">
+          *icon*
+        </div>
+        <div class="inset">
+          Something Gamey
+        </div>
+      </md-list-item>
+    </div>
+    <md-divider></md-divider>
+    <md-subheader>Management</md-subheader>
+    <md-list-item ng-click="console.log()">
+      <div class="inset">
+        efgh
+      </div>
+      <div class="inset">
+        testing 2
+      </div>
+    </md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <div layout="column" layout-fill >
+    <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Hivemind</span>
+        </h2>
+        <span flex></span>
+        <md-button ng-hide="isLoggedIn" ng-click="auth.$signInWithPopup('google')" aria-label="Log In">
+          Log In
+        </md-button>
+        <div ng-show="isLoggedIn">
+          <md-menu>
+            <md-button aria-label="User Menu" ng-click="openMenu($mdOpenMenu, $event)">
+              <div layout="row">
+                <img ng-src="{{ userProfileUrl }}" alt="{{ userDisplayName }}" class="profile_img-small">
+                <span flex>{{ userDisplayName }}</span>
+              </div>
+            </md-button>
+            <md-menu-content width="4">
+              <md-menu-item>
+                <md-button ng-click="viewUserProfile()">
+                  User Profile
+                </md-button>
+              </md-menu-item>
+              <md-menu-item ng-if="$route.current.params.game_name">
+                <md-button ng-click="viewPlayerProfile($route.current.params.game_name)">
+                  Player Profile
+                </md-button>
+              </md-menu-item>
+              <md-menu-divider></md-menu-divider>
+              <md-menu-item>
+                <md-button ng-click="auth.$signOut()">
+                  Log Out
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <!-- <md-button ng-show="isLoggedIn" ng-click="auth.$signOut()" aria-label="Log Out">
+          Log Out
+        </md-button> -->
+        <md-button class="md-icon-button" ng-click="toggleNav()" ng-show="showNavButton()" aria-label="Menu">
+          <ng-md-icon icon="menu"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content layout-padding ng-cloak ng-view></md-content>
+  </div>
+</div>
+</body>
+</html>

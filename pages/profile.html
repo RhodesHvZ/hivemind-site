@@ -1,0 +1,100 @@
+
+<div layout="column">
+  <h1 class="md-display-3">
+    Profile
+  </h1>
+
+  <div layout="column" ng-show="loading_complete">
+    <div>
+      <md-input-container>
+        <label>Default Display Name</label>
+        <input type="text" ng-model="profile.username">
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <label>Phone Number</label>
+        <input type="text" ng-model="profile.phone_number">
+      </md-input-container>
+    </div>
+
+    <div layout="row">
+      <table>
+
+        <tr>
+          <td>
+            <p class="md-body-2">
+              Profile Image
+            </p>
+          </td>
+          <td>
+            <img ng-src="{{ profile.picture }}" alt="profile_image"/>
+          </td>
+          <td>
+            <md-button>Upload New Image</md-button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p class="md-body-2">
+              Name
+            </p>
+          </td>
+          <td>
+            <p class="md-body-2">
+              {{ profile.name }}
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p class="md-body-2">
+              Email
+            </p>
+          </td>
+          <td>
+            <p class="md-body-2">
+              {{ profile.email }}
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p class="md-body-2">
+              Member Since
+            </p>
+          </td>
+          <td>
+            <p class="md-body-2">
+              {{ profile.date_joined | date:'medium' }}
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p class="md-body-2">
+              Rhodes Email
+            </p>
+          </td>
+          <td>
+            <p class="md-body-2">
+              {{ profile.student_email || 'Not Yet Set' }}
+            </p>
+          </td>
+          <td>
+            <md-button>Set Rhodes Email Address</md-button>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+  <div style="margin: 0px auto;" ng-hide="loading_complete">
+    <md-progress-circular md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+  </div>
+</div>
