@@ -114,7 +114,7 @@
           </td>
           <td>
             <p class="md-body-2">
-              {{ player.revive_count }}<span ng-if="player.revive_pending" class="md-warn"> Pending</span>
+              {{ player.revive_count || 0 }}<span ng-if="player.revive_pending" class="md-warn"> Pending</span>
             </p>
           </td>
         </tr>
