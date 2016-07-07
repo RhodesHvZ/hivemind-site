@@ -75,3 +75,9 @@ app.factory('gameStateToString', function () {
     }
   }
 })
+
+app.factory('getCurrentGame', function ($firebaseObject, currentGameRefFactory) {
+  return currentGameRefFactory().then((gameRef) => {
+    return gameRef ? $firebaseObject(gameRef) : null
+  })
+})

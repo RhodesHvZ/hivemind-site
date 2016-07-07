@@ -59,13 +59,28 @@ app.factory ('Auth', function ($firebaseAuth) {
   return $firebaseAuth()
 })
 
-app.controller('mainAppController', function ($scope, $mdSidenav, $mdDialog, Auth, $location, $route) {
+app.controller('mainAppController', function (
+    $scope,
+    $mdSidenav,
+    $mdDialog,
+    $location,
+    $route,
+    getCurrentGame,
+    Auth
+  ) {
   $scope.$route = $route
   $scope.isLoggedIn = false
   $scope.userDisplayName = 'Firstname Lastname'
   $scope.userEmail = 'person@example.com'
   $scope.userProfileUrl = ''
   $scope.auth = Auth
+
+  getCurrentGame.then((game) => {
+    if (game) {
+      $scope.currentGame = game
+      $scope.$apply()
+    }
+  })
 
   $scope.toggleNav = function () {
     $mdSidenav('sidenav').toggle();

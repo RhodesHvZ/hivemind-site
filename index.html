@@ -86,15 +86,31 @@
         Other
       </div>
     </md-list-item>
-    <div ng-if="$route.current.params.game_name">
+    <div ng-if="currentGame">
       <md-divider></md-divider>
-      <md-subheader>Game</md-subheader>
-      <md-list-item ng-click="console.log()">
+      <md-subheader>{{ currentGame.title }}</md-subheader>
+      <md-list-item ng-click="redirect('/game/' + currentGame.$id)">
         <div class="inset">
           *icon*
         </div>
         <div class="inset">
-          Something Gamey
+          Dashboard
+        </div>
+      </md-list-item>
+      <md-list-item ng-click="redirect('/game/' + currentGame.$id + '/chat')">
+        <div class="inset">
+          *icon*
+        </div>
+        <div class="inset">
+          Chat
+        </div>
+      </md-list-item>
+      <md-list-item ng-click="redirect('/game/' + currentGame.$id + '/squad')">
+        <div class="inset">
+          *icon*
+        </div>
+        <div class="inset">
+          Squad
         </div>
       </md-list-item>
     </div>
