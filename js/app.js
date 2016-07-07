@@ -50,6 +50,10 @@ app.config(function ($routeProvider, $locationProvider) {
     templateUrl: '/pages/player.html',
     controller: 'playerController'
   })
+  .when('/game/:game_name/squad', {
+    templateUrl: '/pages/squad.html',
+    controller: 'squadController'
+  })
   .otherwise({ redirectTo: '/' })
 
   $locationProvider.html5Mode(true)

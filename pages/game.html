@@ -2,7 +2,7 @@
   <div ng-show="loading_complete">
     <h3 class="md-display-3">{{ game.title }}</h3>
     <div layout="row">
-      <div flex="75">
+      <div flex>
         <h4 class="md-display-1">Rules</h4>
         <p class="md-body-1 indent">
           By participating in this game, you certify that you have read and agree to the
@@ -10,12 +10,6 @@
           <a ng-href="{{ game.waiver_url }}"><span class="md-body-2">Player Waiver</span></a>
           and
           <a ng-href="/toc"><span class="md-body-2">Terms and Conditions</span></a>.
-        </p>
-      </div>
-      <div flex>
-        <h4 class="md-display-1">Chat</h4>
-        <p class="indent">
-          <a ng-href="/game/{{ game.name }}/chat">Open Chat</a>
         </p>
       </div>
     </div>
@@ -69,6 +63,17 @@
 
       <md-tab>
         <md-tab-label>
+          Story
+        </md-tab-label>
+        <md-tab-body>
+          <p>
+            Hello World
+          </p>
+        </md-tab-body>
+      </md-tab>
+
+      <md-tab>
+        <md-tab-label>
           Map
         </md-tab-label>
         <md-tab-body>
@@ -99,28 +104,6 @@
       <md-tab>
         <md-tab-label>
           Leaderboard
-        </md-tab-label>
-        <md-tab-body>
-          <p>
-            Hello World
-          </p>
-        </md-tab-body>
-      </md-tab>
-
-      <md-tab>
-        <md-tab-label>
-          Squads
-        </md-tab-label>
-        <md-tab-body>
-          <p>
-            <ng-include src="'/pages/squad.html'" scope="$scope"></ng-include>
-          </p>
-        </md-tab-body>
-      </md-tab>
-
-      <md-tab>
-        <md-tab-label>
-          Flavour
         </md-tab-label>
         <md-tab-body>
           <p>
