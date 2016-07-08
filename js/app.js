@@ -103,7 +103,6 @@ app.controller('mainAppController', function (
       $scope.userProfileUrl = firebaseUser.photoURL
 
       getCurrentGame().then((game) => {
-        console.log('AUTH STATE CHANGED')
         if (game) {
           $scope.currentGame = game
           $scope.$apply()
