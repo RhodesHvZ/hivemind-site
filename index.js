@@ -10,12 +10,12 @@ app.use('/js', express.static('js'))
 app.use('/pages', express.static('pages'))
 app.use('/img', express.static('img'))
 
-app.get('/:page', function (req, res, next) {
+app.get('*', function (req, res, next) {
   res.sendFile(path.join(cwd, 'index.html'))
 })
 
-app.get('/', function (req, res, next) {
-  res.sendFile(path.join(cwd, 'index.html'))
-})
+//app.get('/', function (req, res, next) {
+//  res.sendFile(path.join(cwd, 'index.html'))
+//})
 
 app.listen(3000)
