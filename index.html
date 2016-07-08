@@ -147,12 +147,12 @@
             </md-button>
             <md-menu-content width="4">
               <md-menu-item>
-                <md-button ng-click="viewUserProfile()">
+                <md-button ng-click="redirect('profile')">
                   User Profile
                 </md-button>
               </md-menu-item>
-              <md-menu-item ng-if="$route.current.params.game_name">
-                <md-button ng-click="viewPlayerProfile($route.current.params.game_name)">
+              <md-menu-item ng-if="currentGame">
+                <md-button ng-click="viewPlayerProfile(currentGame.name)">
                   Player Profile
                 </md-button>
               </md-menu-item>

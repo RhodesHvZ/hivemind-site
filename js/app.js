@@ -90,11 +90,11 @@ app.controller('mainAppController', function (
   }
 
   $scope.viewUserProfile = function () {
-    $location.path('profile')
+    $scope.redirect('profile')
   }
 
   $scope.viewPlayerProfile = function (game_name) {
-    $location.path('game/' + game_name + '/player' )
+    $scope.redirect('game/' + game_name + '/player' )
   }
 
   function $getCurrentGame () {
