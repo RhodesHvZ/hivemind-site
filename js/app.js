@@ -70,7 +70,8 @@ app.controller('mainAppController', function (
     $location,
     $route,
     getCurrentGame,
-    Auth
+    Auth,
+    Game
   ) {
   $scope.$route = $route
   $scope.isLoggedIn = false
@@ -96,18 +97,30 @@ app.controller('mainAppController', function (
     $location.path('game/' + game_name + '/player' )
   }
 
+  function $getCurrentGame () {
+    getCurrentGame().then((game) => {
+      if (game) {
+        $scope.currentGame = game
+        $scope.$apply()
+      }
+    })
+  }
+
+  $scope.$on('$locationChangeSuccess', function (next, current) {
+    if ($route.current.params.game_name) {
+      $scope.currentGame = Game($route.current.params.game_name)
+    } else {
+      $getCurrentGame()
+    }
+  })
+
   $scope.auth.$onAuthStateChanged(function (firebaseUser) {
     if (firebaseUser) {
       $scope.userDisplayName = firebaseUser.displayName
       $scope.userEmail = firebaseUser.email
       $scope.userProfileUrl = firebaseUser.photoURL
 
-      getCurrentGame().then((game) => {
-        if (game) {
-          $scope.currentGame = game
-          $scope.$apply()
-        }
-      })
+      $getCurrentGame()
     }
     $scope.isLoggedIn = firebaseUser != null
   })
